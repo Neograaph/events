@@ -43,11 +43,16 @@ class DoctrineSubscribe implements EventSubscriberInterface
     
         if ($entity instanceof User) {
             $lenghtArray = count($this->userRepository->findAll());
+
             dump($entity->getRoles());
-            dump($this->userRepository->findAll());
+            dump($this->userRepository->findBy(array('roles' => '[1]["ROLE_USER"]')));
+            dump($this->userRepository->findBy(array('id' => 1)));
             // die;
-            if ($lenghtArray > 3){
+            
+            if ($lenghtArray > 3){  
                 dd('> à 3');
+                // header('Location: https://127.0.0.1:8000/user/');
+                die;
             }else{
                 dd('< à 3');
             }
