@@ -28,11 +28,11 @@ class DoctrineSubscribe implements EventSubscriberInterface
     public function getSubscribedEvents(): array
     {
         return [
-            Events::prePersist,
+            Events::preRemove,
         ];
     }
 
-    public function prePersist(LifecycleEventArgs $args) :void
+    public function preRemove(LifecycleEventArgs $args) :void
     {
         $this->changeNewUser($args);
     }
@@ -49,8 +49,8 @@ class DoctrineSubscribe implements EventSubscriberInterface
             dump($this->userRepository->findBy(array('id' => 1)));
             // die;
             
-            if ($lenghtArray >= 3){
-                throw new Exception('> à 3');
+            if ($lenghtArray <= 3){
+                throw new Exception('<= à 3');
             }
         };
     }
