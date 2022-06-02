@@ -25,7 +25,7 @@ class DoctrineSubscribe implements EventSubscriberInterface
         if ($entity instanceof User) {
             // dd($entity->getRoles());
             dd($userRepository->findAll());
-        };
+        }
     }
 }
 
