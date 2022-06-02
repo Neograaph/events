@@ -10,6 +10,7 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 
 class DoctrineSubscribe implements EventSubscriberInterface
 {
@@ -21,7 +22,6 @@ class DoctrineSubscribe implements EventSubscriberInterface
         $this->manager = $manager;
         $this->userRepository = $userRepository;
     }
-    
     
     // this method can only return the event names; you cannot define a
     // custom method name to execute when each event triggers
@@ -49,25 +49,9 @@ class DoctrineSubscribe implements EventSubscriberInterface
             dump($this->userRepository->findBy(array('id' => 1)));
             // die;
             
-            if ($lenghtArray > 3){  
-                dd('> à 3');
-                // header('Location: https://127.0.0.1:8000/user/');
-                die;
-            }else{
-                dd('< à 3');
+            if ($lenghtArray >= 3){
+                throw new Exception('> à 3');
             }
-            // $this->userRepository->;
         };
-
     }
 }
-
-// class DoctrineAbstract extends AbstractController
-// {
-//     public function findAllUserRepo(UserRepository $userRepo)
-//     {
-//         return $userRepo->findAll();
-//     }
-// }
-
-?>
